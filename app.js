@@ -9,8 +9,11 @@ require('./config/database');
 const app = express();
 app.use(express.json());
 
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'public')))
 
+=======
+>>>>>>> bbeda5e9952bd96892201034276c6de56e05fd8a
 app.set('views', path.join(__dirname, '/src/views'));
 app.set('view engine', 'ejs');
 
