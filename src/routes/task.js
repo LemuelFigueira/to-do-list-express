@@ -32,7 +32,6 @@ checklistDepedentRoute.post('/:id/tasks', async (req, res) => {
 
     let { name } = req.body.task;
 
-    console.log(name);
     let task = new Task({ name, checklist: req.params.id });
 
     try {

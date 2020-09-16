@@ -2,6 +2,7 @@ const express = require('express')
 
 const router = express.Router();
 const Checklist = require('../models/checklist');
+const Task = require('../models/task');
 
 router.get('/', async (req, res) => {
     try {
@@ -46,7 +47,17 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         let checklist = await Checklist.findById(req.params.id);
-        res.status(200).render('checklists/show', { checklist: checklist })
+        var tasks = [];
+
+        const promises = checklist.tasks.map(async (taskID, index) => {
+            let task = await Task.findById(taskID);
+
+            tasks.push(task);
+        });
+
+        await Promise.all(promises);
+
+        res.status(200).render('checklists/show', { checklist: checklist, tasks: tasks });
     } catch (error) {
         res.status(500).render('pages/error', { error: "Erro ao exibir as Listas de Tarefas" })
     }
