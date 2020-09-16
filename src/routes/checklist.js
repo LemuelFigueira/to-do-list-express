@@ -51,7 +51,6 @@ router.get('/:id', async (req, res) => {
 
         const promises = checklist.tasks.map(async (taskID, index) => {
             let task = await Task.findById(taskID);
-
             tasks.push(task);
         });
 
